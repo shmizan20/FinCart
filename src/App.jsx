@@ -348,7 +348,7 @@ const CTASection = () => (
           >
             <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transform hover:scale-[1.03] transition-all duration-700">
               <img 
-                src="/fincart_cta_visual_1778493280975.png" 
+                src="/fincart_cta_visual.png" 
                 alt="Premium Financial Visual" 
                 className="w-full h-auto object-cover"
               />
