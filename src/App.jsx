@@ -283,29 +283,47 @@ const TopPicks = () => {
 
 const FacilityHub = () => {
   const facilities = [
-    { icon: CreditCard, label: "Credit Cards", color: "from-blue-400 to-indigo-500", delay: 0 },
-    { icon: Banknote, label: "Personal Loan", color: "from-emerald-400 to-teal-500", delay: 1 },
-    { icon: Landmark, label: "Auto Loan", color: "from-orange-400 to-red-500", delay: 2 },
-    { icon: Home, label: "Home Loan", color: "from-purple-400 to-pink-500", delay: 3 },
-    { icon: PiggyBank, label: "FD & Savings", color: "from-amber-400 to-yellow-500", delay: 4 },
-    { icon: TrendingUp, label: "Investments", color: "from-cyan-400 to-blue-500", delay: 5 },
+    { icon: CreditCard, label: "Credit Cards", color: "from-blue-500/20 to-indigo-500/20", glow: "shadow-blue-500/40", delay: 0 },
+    { icon: Banknote, label: "Personal Loan", color: "from-emerald-500/20 to-teal-500/20", glow: "shadow-emerald-500/40", delay: 1 },
+    { icon: Landmark, label: "Auto Loan", color: "from-orange-500/20 to-red-500/20", glow: "shadow-orange-500/40", delay: 2 },
+    { icon: Home, label: "Home Loan", color: "from-purple-500/20 to-pink-500/20", glow: "shadow-purple-500/40", delay: 3 },
+    { icon: PiggyBank, label: "FD & Savings", color: "from-amber-500/20 to-yellow-500/20", glow: "shadow-amber-500/40", delay: 4 },
+    { icon: TrendingUp, label: "Investments", color: "from-cyan-500/20 to-blue-500/20", glow: "shadow-cyan-500/40", delay: 5 },
   ];
 
   return (
-    <div className="relative w-full aspect-square max-w-lg mx-auto flex items-center justify-center">
-      {/* Central Logo */}
+    <div className="relative w-full aspect-square max-w-xl mx-auto flex items-center justify-center scale-90 md:scale-100">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[450px] h-[450px] border border-white/5 rounded-full"
+        />
+        <motion.div 
+          animate={{ rotate: -360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[350px] h-[350px] border border-white/10 rounded-full border-dashed"
+        />
+      </div>
+
+      {/* Central Logo - High Glow */}
       <motion.div 
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-20 bg-white/10 backdrop-blur-xl p-8 rounded-full border border-white/20 shadow-[0_0_80px_rgba(59,130,246,0.3)]"
+        className="relative z-20 group"
       >
-        <Logo className="scale-125" />
+        <div className="absolute inset-0 bg-blue-500/20 blur-[60px] group-hover:bg-blue-500/40 transition-colors duration-500"></div>
+        <div className="relative bg-white/5 backdrop-blur-2xl p-10 rounded-[2.5rem] border border-white/20 shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+          <Logo className="scale-[1.4] relative z-10" />
+        </div>
       </motion.div>
 
-      {/* Orbiting Facilities */}
+      {/* Orbiting Facilities with Flowing Paths */}
       {facilities.map((f, i) => {
         const angle = (i * 360) / facilities.length;
-        const radius = 160; // Desktop radius
+        const radius = 200; 
         const x = Math.cos((angle * Math.PI) / 180) * radius;
         const y = Math.sin((angle * Math.PI) / 180) * radius;
 
@@ -315,61 +333,100 @@ const FacilityHub = () => {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}
-            transition={{ delay: f.delay * 0.1, type: "spring" }}
+            transition={{ delay: f.delay * 0.1, type: "spring", stiffness: 100 }}
             className="absolute z-30"
             style={{ x, y }}
           >
             <motion.div
               animate={{ 
-                y: [0, -10, 0],
-                x: [0, 5, 0]
+                y: [0, -15, 0],
+                rotate: [0, 2, 0]
               }}
               transition={{ 
-                duration: 3 + i, 
+                duration: 4 + i, 
                 repeat: Infinity, 
                 ease: "easeInOut",
                 delay: i * 0.5
               }}
-              className="flex flex-col items-center gap-2 group cursor-pointer"
+              className="flex flex-col items-center gap-3 group"
             >
-              <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform`}>
-                <f.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+              <div className={`relative w-16 h-16 md:w-20 md:h-20 rounded-[1.5rem] bg-gradient-to-br ${f.color} flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-xl group-hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2`}>
+                <f.icon className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-lg" />
+                <div className={`absolute inset-0 rounded-[1.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/20 -z-10`}></div>
               </div>
-              <span className="text-[10px] md:text-xs font-black text-white/80 uppercase tracking-widest whitespace-nowrap bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                {f.label}
-              </span>
+              <div className="px-4 py-1.5 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg group-hover:bg-white/10 transition-colors">
+                <span className="text-[10px] md:text-xs font-black text-white uppercase tracking-[0.2em] whitespace-nowrap">
+                  {f.label}
+                </span>
+              </div>
             </motion.div>
 
-            {/* Connecting Line */}
-            <svg className="absolute top-1/2 left-1/2 -z-10 w-[200px] h-[200px] pointer-events-none overflow-visible" style={{ transform: `translate(-50%, -50%)` }}>
-              <motion.line 
-                x1="0" y1="0" 
-                x2={-x} y2={-y} 
-                stroke="white" 
-                strokeWidth="1" 
-                strokeDasharray="4 4"
+            {/* Glowing Flow Path */}
+            <svg className="absolute top-1/2 left-1/2 -z-10 w-[400px] h-[400px] pointer-events-none overflow-visible" style={{ transform: `translate(-50%, -50%)` }}>
+              <defs>
+                <linearGradient id={`grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                  <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
+                  <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                </linearGradient>
+              </defs>
+              <motion.path
+                d={`M 0 0 Q ${-x/2} ${-y/2} ${-x} ${-y}`}
+                fill="none"
+                stroke={`url(#grad-${i})`}
+                strokeWidth="2"
                 initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 0.2 }}
-                viewport={{ once: false }}
-                animate={{ strokeDashoffset: [0, -20] }}
-                transition={{ strokeDashoffset: { duration: 2, repeat: Infinity, ease: "linear" } }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
+                animate={{ strokeDashoffset: [0, -100] }}
+                transition={{ 
+                  strokeDashoffset: { duration: 3, repeat: Infinity, ease: "linear" },
+                  pathLength: { duration: 1.5, delay: 0.5 }
+                }}
+                strokeDasharray="10 20"
+              />
+              <motion.circle 
+                r="3" 
+                fill="white"
+                className="blur-[2px]"
+                animate={{ 
+                  cx: [0, -x],
+                  cy: [0, -y],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "linear",
+                  delay: i * 0.5
+                }}
               />
             </svg>
           </motion.div>
         );
       })}
 
-      {/* Background Pulse Rings */}
-      <div className="absolute inset-0 flex items-center justify-center -z-10">
-        {[1, 2, 3].map((r) => (
-          <motion.div
-            key={r}
-            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
-            transition={{ duration: 4, delay: r, repeat: Infinity }}
-            className="absolute w-64 h-64 border border-blue-500/30 rounded-full"
-          />
-        ))}
-      </div>
+      {/* Ambient Floating Particles */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: [0, 0.5, 0],
+            y: [0, -100, 0],
+            x: [0, (Math.random() - 0.5) * 200, 0]
+          }}
+          transition={{ 
+            duration: 5 + Math.random() * 5, 
+            repeat: Infinity,
+            delay: Math.random() * 5
+          }}
+          className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
+          style={{ 
+            top: `${Math.random() * 100}%`, 
+            left: `${Math.random() * 100}%` 
+          }}
+        />
+      ))}
     </div>
   );
 };
