@@ -43,7 +43,7 @@ const TOP_PICKS_DATA = {
 };
 
 const Logo = ({ className = "" }) => (
-  <div className={`flex flex-col cursor-pointer select-none ${className}`}>
+  <div className={`flex flex-col cursor-pointer select-none w-fit ${className}`}>
     <div className="flex items-center gap-1">
       <div className="flex flex-col gap-[3px] transform -skew-x-[24deg] pt-1 mr-0.5">
         <div className="w-5 h-[5px] bg-[#8B5CF6] rounded-sm translate-x-[6px]"></div>
@@ -52,7 +52,7 @@ const Logo = ({ className = "" }) => (
       </div>
       <span className="text-[26px] font-black tracking-tight text-[#2B3CA0] leading-none uppercase">finKart</span>
     </div>
-    <div className="flex items-center justify-end pr-1 mt-[2px]">
+    <div className="flex justify-end pr-1 mt-[2px] w-full">
       <span className="text-[10px] font-extrabold text-[#2B3CA0] leading-none uppercase tracking-tighter">by sslcommerz</span>
     </div>
   </div>
