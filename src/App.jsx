@@ -281,6 +281,99 @@ const TopPicks = () => {
   );
 };
 
+const FacilityHub = () => {
+  const facilities = [
+    { icon: CreditCard, label: "Credit Cards", color: "from-blue-400 to-indigo-500", delay: 0 },
+    { icon: Banknote, label: "Personal Loan", color: "from-emerald-400 to-teal-500", delay: 1 },
+    { icon: Landmark, label: "Auto Loan", color: "from-orange-400 to-red-500", delay: 2 },
+    { icon: Home, label: "Home Loan", color: "from-purple-400 to-pink-500", delay: 3 },
+    { icon: PiggyBank, label: "FD & Savings", color: "from-amber-400 to-yellow-500", delay: 4 },
+    { icon: TrendingUp, label: "Investments", color: "from-cyan-400 to-blue-500", delay: 5 },
+  ];
+
+  return (
+    <div className="relative w-full aspect-square max-w-lg mx-auto flex items-center justify-center">
+      {/* Central Logo */}
+      <motion.div 
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="relative z-20 bg-white/10 backdrop-blur-xl p-8 rounded-full border border-white/20 shadow-[0_0_80px_rgba(59,130,246,0.3)]"
+      >
+        <Logo className="scale-125" />
+      </motion.div>
+
+      {/* Orbiting Facilities */}
+      {facilities.map((f, i) => {
+        const angle = (i * 360) / facilities.length;
+        const radius = 160; // Desktop radius
+        const x = Math.cos((angle * Math.PI) / 180) * radius;
+        const y = Math.sin((angle * Math.PI) / 180) * radius;
+
+        return (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ delay: f.delay * 0.1, type: "spring" }}
+            className="absolute z-30"
+            style={{ x, y }}
+          >
+            <motion.div
+              animate={{ 
+                y: [0, -10, 0],
+                x: [0, 5, 0]
+              }}
+              transition={{ 
+                duration: 3 + i, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: i * 0.5
+              }}
+              className="flex flex-col items-center gap-2 group cursor-pointer"
+            >
+              <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform`}>
+                <f.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+              </div>
+              <span className="text-[10px] md:text-xs font-black text-white/80 uppercase tracking-widest whitespace-nowrap bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                {f.label}
+              </span>
+            </motion.div>
+
+            {/* Connecting Line */}
+            <svg className="absolute top-1/2 left-1/2 -z-10 w-[200px] h-[200px] pointer-events-none overflow-visible" style={{ transform: `translate(-50%, -50%)` }}>
+              <motion.line 
+                x1="0" y1="0" 
+                x2={-x} y2={-y} 
+                stroke="white" 
+                strokeWidth="1" 
+                strokeDasharray="4 4"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 0.2 }}
+                viewport={{ once: false }}
+                animate={{ strokeDashoffset: [0, -20] }}
+                transition={{ strokeDashoffset: { duration: 2, repeat: Infinity, ease: "linear" } }}
+              />
+            </svg>
+          </motion.div>
+        );
+      })}
+
+      {/* Background Pulse Rings */}
+      <div className="absolute inset-0 flex items-center justify-center -z-10">
+        {[1, 2, 3].map((r) => (
+          <motion.div
+            key={r}
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 4, delay: r, repeat: Infinity }}
+            className="absolute w-64 h-64 border border-blue-500/30 rounded-full"
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const CTASection = () => (
   <section className="py-16 bg-white overflow-hidden">
     <motion.div 
@@ -289,7 +382,6 @@ const CTASection = () => (
       viewport={{ once: false }}
       className="relative bg-[#0F172A] py-16 md:py-24 overflow-hidden shadow-2xl"
     >
-      {/* Animated Background Mesh - Full Width */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <div className="absolute top-0 right-[-100px] w-[800px] h-[800px] bg-blue-600 rounded-full blur-[150px] animate-pulse"></div>
         <div className="absolute bottom-0 left-[-100px] w-[600px] h-[600px] bg-purple-600 rounded-full blur-[120px] opacity-60"></div>
@@ -297,7 +389,7 @@ const CTASection = () => (
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="text-left">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -306,22 +398,22 @@ const CTASection = () => (
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></div>
-              Everything you need in one place
+              Your complete financial ecosystem
             </motion.div>
             
             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-              One Marketplace. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Unlimited Financial</span> <br />
-              Possibilities.
+              One Platform. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Total Financial</span> <br />
+              Control.
             </h2>
             
             <p className="text-slate-400 text-base md:text-lg mb-10 font-medium leading-relaxed max-w-xl">
-              From premium Credit Cards and low-interest Loans to high-growth Investments—compare and choose the best financial products from top banks in Bangladesh.
+              From daily payments to lifetime goals, FinKart connects you with every financial facility you'll ever need. Compare, apply, and grow—all in one interactive hub.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
               <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 text-white px-8 py-4 rounded-xl font-black text-base hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-[1.02] transition-all">
-                Explore Marketplace
+                Get Started Now
               </button>
               <button className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl font-black text-base hover:bg-white/10 transition-all backdrop-blur-sm">
                 Talk to Advisor
@@ -330,9 +422,9 @@ const CTASection = () => (
 
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/5">
               {[
-                { label: 'Products', val: '100+' },
-                { label: 'Banks', val: '24+' },
-                { label: 'Success', val: '99%' }
+                { label: 'Partners', val: '24+' },
+                { label: 'Solutions', val: '12+' },
+                { label: 'Uptime', val: '99.9%' }
               ].map((s, i) => (
                 <div key={i}>
                   <p className="text-xl font-black text-white">{s.val}</p>
@@ -342,39 +434,7 @@ const CTASection = () => (
             </div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="relative"
-          >
-            {/* Interactive Floating Visual */}
-            <motion.div 
-              animate={{ 
-                y: [0, -20, 0],
-                rotate: [0, 1, 0]
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.2)] transform transition-all duration-700 max-w-lg mx-auto lg:ml-auto"
-            >
-              <img 
-                src="/fincart_ecosystem.png" 
-                alt="FinCart Financial Ecosystem" 
-                className="w-full h-auto object-cover scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-40"></div>
-              
-              {/* Overlay Interactive Glow */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 pointer-events-none"></div>
-            </motion.div>
-            
-            {/* Background Glow Orbs */}
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] animate-pulse"></div>
-            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px] animate-pulse delay-1000"></div>
-          </motion.div>
+          <FacilityHub />
         </div>
       </div>
     </motion.div>
