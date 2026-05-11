@@ -281,6 +281,41 @@ const TopPicks = () => {
   );
 };
 
+const CTASection = () => (
+  <section className="py-24 bg-white">
+    <div className="max-w-7xl mx-auto px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        className="relative overflow-hidden bg-gradient-to-br from-[#2B3CA0] via-[#3582BC] to-[#9B51E0] rounded-[3rem] p-12 md:p-24 text-center text-white shadow-2xl"
+      >
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-[100px]"></div>
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white rounded-full blur-[100px]"></div>
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
+            Ready to Take Control of Your Finances?
+          </h2>
+          <p className="text-white/80 text-lg md:text-xl mb-12 font-medium">
+            Join thousands of Bangladeshis who are making smarter financial decisions every day with FinCart.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <button className="bg-white text-[#2B3CA0] px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition-all shadow-xl hover:shadow-white/20">
+              Get Started Now
+            </button>
+            <button className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
+              Contact Advisor
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
 const Footer = () => (
   <footer className="bg-white border-t border-gray-50 pt-24 pb-12">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
@@ -311,6 +346,7 @@ export default function App() {
       <Partners />
       <PlanningSection />
       <TopPicks />
+      <CTASection />
       <Footer />
     </div>
   );
