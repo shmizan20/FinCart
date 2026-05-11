@@ -42,10 +42,26 @@ const TOP_PICKS_DATA = {
   ]
 };
 
+const Logo = ({ className = "" }) => (
+  <div className={`flex flex-col cursor-pointer select-none ${className}`}>
+    <div className="flex items-center gap-1">
+      <div className="flex flex-col gap-[3px] transform -skew-x-[24deg] pt-1 mr-0.5">
+        <div className="w-5 h-[5px] bg-[#8B5CF6] rounded-sm translate-x-[6px]"></div>
+        <div className="w-5 h-[5px] bg-[#3B82F6] rounded-sm translate-x-[3px]"></div>
+        <div className="w-5 h-[5px] bg-[#10B981] rounded-sm"></div>
+      </div>
+      <span className="text-[26px] font-black tracking-tight text-[#2B3CA0] leading-none uppercase">finKart</span>
+    </div>
+    <div className="flex items-center justify-end pr-1 mt-[2px]">
+      <span className="text-[10px] font-extrabold text-[#2B3CA0] leading-none uppercase tracking-tighter">by sslcommerz</span>
+    </div>
+  </div>
+);
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -53,19 +69,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md py-3 shadow-sm' : 'py-5'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div className="flex flex-col cursor-pointer select-none">
-          <div className="flex items-center gap-1">
-            <div className="flex flex-col gap-[3px] transform -skew-x-[24deg] pt-1 mr-0.5">
-              <div className="w-5 h-[5px] bg-[#8B5CF6] rounded-sm translate-x-[6px]"></div>
-              <div className="w-5 h-[5px] bg-[#3B82F6] rounded-sm translate-x-[3px]"></div>
-              <div className="w-5 h-[5px] bg-[#10B981] rounded-sm"></div>
-            </div>
-            <span className="text-[26px] font-black tracking-tight text-[#2B3CA0] leading-none uppercase">finKart</span>
-          </div>
-          <div className="flex items-center justify-end w-full pr-1 mt-[3px]">
-            <span className="text-[10px] font-extrabold text-[#2B3CA0] mr-1 leading-none uppercase tracking-tighter">by sslcommerz</span>
-          </div>
-        </div>
+        <Logo />
         <div className="hidden md:flex items-center gap-8 font-semibold text-slate-600">
           <a href="#products" className="hover:text-[#3582BC] transition-colors">Products</a>
           <a href="#compare" className="hover:text-[#3582BC] transition-colors">Compare</a>
@@ -281,13 +285,7 @@ const Footer = () => (
   <footer className="bg-white border-t border-gray-50 pt-24 pb-12">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
       <div>
-        <div className="flex flex-col mb-6">
-          <div className="flex items-center gap-1">
-            <div className="flex flex-col gap-[3px] transform -skew-x-[24deg] pt-1 mr-0.5"><div className="w-4 h-[4px] bg-[#8B5CF6] rounded-sm translate-x-[5px]"></div><div className="w-4 h-[4px] bg-[#3B82F6] rounded-sm translate-x-[3px]"></div><div className="w-4 h-[4px] bg-[#10B981] rounded-sm"></div></div>
-            <span className="text-2xl font-black tracking-tight text-[#2B3CA0] leading-none uppercase">finKart</span>
-          </div>
-          <div className="flex items-center justify-end w-full pr-1 mt-1"><span className="text-[8px] font-extrabold text-[#2B3CA0] mr-1 uppercase">by sslcommerz</span></div>
-        </div>
+        <Logo className="mb-6 scale-90 origin-left" />
         <p className="text-slate-400 text-sm font-medium">The most trusted financial marketplace in Bangladesh.</p>
       </div>
       {['Products', 'Company', 'Legal'].map((title, idx) => (
