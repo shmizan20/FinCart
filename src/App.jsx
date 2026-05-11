@@ -282,34 +282,83 @@ const TopPicks = () => {
 };
 
 const CTASection = () => (
-  <section className="py-24 bg-white">
+  <section className="py-24 bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto px-6">
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: false }}
-        className="relative overflow-hidden bg-gradient-to-br from-[#2B3CA0] via-[#3582BC] to-[#9B51E0] rounded-[3rem] p-12 md:p-24 text-center text-white shadow-2xl"
+        className="relative bg-[#0F172A] rounded-[3.5rem] p-8 md:p-16 lg:p-24 overflow-hidden shadow-2xl"
       >
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-[100px]"></div>
-          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white rounded-full blur-[100px]"></div>
+        {/* Animated Background Mesh */}
+        <div className="absolute inset-0 opacity-40 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600 rounded-full blur-[100px] opacity-60"></div>
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
         </div>
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
-            Ready to Take Control of Your Finances?
-          </h2>
-          <p className="text-white/80 text-lg md:text-xl mb-12 font-medium">
-            Join thousands of Bangladeshis who are making smarter financial decisions every day with FinCart.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button className="bg-white text-[#2B3CA0] px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition-all shadow-xl hover:shadow-white/20">
-              Get Started Now
-            </button>
-            <button className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
-              Contact Advisor
-            </button>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-8"
+            >
+              <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></div>
+              Join the future of finance
+            </motion.div>
+            
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+              Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Transform</span> Your Financial Journey?
+            </h2>
+            
+            <p className="text-slate-400 text-lg md:text-xl mb-12 font-medium leading-relaxed max-w-xl">
+              Stop settling for generic financial advice. Get a personalized roadmap tailored to your goals and secure your future with FinCart's advanced marketplace.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 mb-12">
+              <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-lg hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] hover:scale-[1.02] transition-all">
+                Get Started Free
+              </button>
+              <button className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
+                Talk to Advisor
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-8 pt-10 border-t border-white/5">
+              {[
+                { label: 'Users', val: '500k+' },
+                { label: 'Partners', val: '24+' },
+                { label: 'Rating', val: '4.9/5' }
+              ].map((s, i) => (
+                <div key={i}>
+                  <p className="text-2xl font-black text-white">{s.val}</p>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="relative"
+          >
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transform hover:scale-[1.03] transition-all duration-700">
+              <img 
+                src="/fincart_cta_visual_1778493280975.png" 
+                alt="Premium Financial Visual" 
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-60"></div>
+            </div>
+            
+            {/* Floating Glow Elements */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500/20 rounded-full blur-[60px] animate-pulse"></div>
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-purple-500/20 rounded-full blur-[60px] animate-pulse delay-700"></div>
+          </motion.div>
         </div>
       </motion.div>
     </div>
