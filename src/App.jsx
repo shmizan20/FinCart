@@ -283,21 +283,21 @@ const TopPicks = () => {
 
 const CTASection = () => (
   <section className="py-24 bg-white overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: false }}
-        className="relative bg-[#0F172A] rounded-[3.5rem] p-8 md:p-16 lg:p-24 overflow-hidden shadow-2xl"
-      >
-        {/* Animated Background Mesh */}
-        <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600 rounded-full blur-[100px] opacity-60"></div>
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        </div>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: false }}
+      className="relative bg-[#0F172A] py-20 md:py-32 overflow-hidden shadow-2xl"
+    >
+      {/* Animated Background Mesh - Full Width */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="absolute top-0 right-[-100px] w-[800px] h-[800px] bg-blue-600 rounded-full blur-[150px] animate-pulse"></div>
+        <div className="absolute bottom-0 left-[-100px] w-[600px] h-[600px] bg-purple-600 rounded-full blur-[120px] opacity-60"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+      </div>
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="text-left">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -360,8 +360,8 @@ const CTASection = () => (
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-purple-500/20 rounded-full blur-[60px] animate-pulse delay-700"></div>
           </motion.div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   </section>
 );
 
