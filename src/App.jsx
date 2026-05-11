@@ -306,20 +306,22 @@ const CTASection = () => (
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></div>
-              Join the future of finance
+              Everything you need in one place
             </motion.div>
             
             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-              Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Transform</span> Your Financial Journey?
+              One Marketplace. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Unlimited Financial</span> <br />
+              Possibilities.
             </h2>
             
             <p className="text-slate-400 text-base md:text-lg mb-10 font-medium leading-relaxed max-w-xl">
-              Stop settling for generic financial advice. Get a personalized roadmap tailored to your goals and secure your future with FinCart's advanced marketplace.
+              From premium Credit Cards and low-interest Loans to high-growth Investments—compare and choose the best financial products from top banks in Bangladesh.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
               <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 text-white px-8 py-4 rounded-xl font-black text-base hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-[1.02] transition-all">
-                Get Started Free
+                Explore Marketplace
               </button>
               <button className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl font-black text-base hover:bg-white/10 transition-all backdrop-blur-sm">
                 Talk to Advisor
@@ -328,9 +330,9 @@ const CTASection = () => (
 
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/5">
               {[
-                { label: 'Users', val: '500k+' },
-                { label: 'Partners', val: '24+' },
-                { label: 'Rating', val: '4.9/5' }
+                { label: 'Products', val: '100+' },
+                { label: 'Banks', val: '24+' },
+                { label: 'Success', val: '99%' }
               ].map((s, i) => (
                 <div key={i}>
                   <p className="text-xl font-black text-white">{s.val}</p>
@@ -341,23 +343,37 @@ const CTASection = () => (
           </div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             className="relative"
           >
-            <div className="relative z-10 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transform hover:scale-[1.03] transition-all duration-700 max-w-md mx-auto lg:ml-auto">
+            {/* Interactive Floating Visual */}
+            <motion.div 
+              animate={{ 
+                y: [0, -20, 0],
+                rotate: [0, 1, 0]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.2)] transform transition-all duration-700 max-w-lg mx-auto lg:ml-auto"
+            >
               <img 
-                src="/fincart_cta_visual.png" 
-                alt="Premium Financial Visual" 
-                className="w-full h-auto object-cover"
+                src="/fincart_ecosystem.png" 
+                alt="FinCart Financial Ecosystem" 
+                className="w-full h-auto object-cover scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-60"></div>
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-40"></div>
+              
+              {/* Overlay Interactive Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 pointer-events-none"></div>
+            </motion.div>
             
-            {/* Floating Glow Elements */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-[50px] animate-pulse"></div>
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-[50px] animate-pulse delay-700"></div>
+            {/* Background Glow Orbs */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] animate-pulse"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px] animate-pulse delay-1000"></div>
           </motion.div>
         </div>
       </div>
