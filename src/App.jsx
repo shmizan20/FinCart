@@ -160,14 +160,16 @@ const Partners = () => {
     { name: "Dhaka Bank", logo: "/Bank Logo/Dhaka Bank.png" },
   ];
   return (
-    <section className="py-12 border-y border-gray-100 bg-white overflow-hidden">
+    <section className="py-12 border-y border-gray-100 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 mb-8 text-center text-[10px] font-black text-slate-400 uppercase tracking-[3px]">Partnering with Leading Banks</div>
-      <div className="flex gap-8 min-w-max animate-marquee py-4 items-center">
-        <div className="flex gap-8 items-center transition-all duration-500">
-          {[...partners, ...partners].map((p, i) => (
-            <img key={i} src={p.logo} alt={p.name} className="h-12 md:h-16 object-contain mx-4" />
-          ))}
-        </div>
+      <div className="flex w-max animate-marquee py-4">
+        {[...Array(4)].map((_, setIndex) => (
+          <div key={setIndex} className="flex items-center gap-12 md:gap-24 px-6 md:px-12">
+            {partners.map((p, i) => (
+              <img key={`${setIndex}-${i}`} src={p.logo} alt={p.name} className="h-12 md:h-16 object-contain" />
+            ))}
+          </div>
+        ))}
       </div>
     </section>
   );
