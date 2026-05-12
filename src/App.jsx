@@ -43,18 +43,12 @@ const TOP_PICKS_DATA = {
 };
 
 const Logo = ({ className = "" }) => (
-  <div className={`flex flex-col cursor-pointer select-none w-fit ${className}`}>
-    <div className="flex items-center gap-1">
-      <div className="flex flex-col gap-[3px] transform -skew-x-[24deg] pt-1 mr-0.5">
-        <div className="w-5 h-[5px] bg-[#8B5CF6] rounded-sm translate-x-[6px]"></div>
-        <div className="w-5 h-[5px] bg-[#3B82F6] rounded-sm translate-x-[3px]"></div>
-        <div className="w-5 h-[5px] bg-[#10B981] rounded-sm"></div>
-      </div>
-      <span className="text-[26px] font-black tracking-tight text-[#2B3CA0] leading-none uppercase">finKart</span>
-    </div>
-    <div className="flex justify-end pr-1 mt-[2px] w-full">
-      <span className="text-[10px] font-extrabold text-[#2B3CA0] leading-none uppercase tracking-tighter">by sslcommerz</span>
-    </div>
+  <div className={`cursor-pointer select-none ${className}`}>
+    <img 
+      src="/Fincart Logo/logo_finkart_by_sslcommerz.svg" 
+      alt="FinCart Logo" 
+      className="h-9 md:h-11 w-auto object-contain"
+    />
   </div>
 );
 
@@ -281,218 +275,56 @@ const TopPicks = () => {
   );
 };
 
-const FacilityHub = () => {
-  const facilities = [
-    { icon: CreditCard, label: "Credit Cards", color: "from-blue-500/20 to-indigo-500/20", glow: "shadow-blue-500/40", delay: 0 },
-    { icon: Banknote, label: "Personal Loan", color: "from-emerald-500/20 to-teal-500/20", glow: "shadow-emerald-500/40", delay: 1 },
-    { icon: Landmark, label: "Auto Loan", color: "from-orange-500/20 to-red-500/20", glow: "shadow-orange-500/40", delay: 2 },
-    { icon: Home, label: "Home Loan", color: "from-purple-500/20 to-pink-500/20", glow: "shadow-purple-500/40", delay: 3 },
-    { icon: PiggyBank, label: "FD & Savings", color: "from-amber-500/20 to-yellow-500/20", glow: "shadow-amber-500/40", delay: 4 },
-    { icon: TrendingUp, label: "Investments", color: "from-cyan-500/20 to-blue-500/20", glow: "shadow-cyan-500/40", delay: 5 },
-  ];
-
-  return (
-    <div className="relative w-full aspect-square max-w-xl mx-auto flex items-center justify-center scale-90 md:scale-100">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[450px] h-[450px] border border-white/5 rounded-full"
-        />
-        <motion.div 
-          animate={{ rotate: -360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[350px] h-[350px] border border-white/10 rounded-full border-dashed"
-        />
-      </div>
-
-      {/* Central Logo - High Glow */}
-      <motion.div 
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-20 group"
-      >
-        <div className="absolute inset-0 bg-blue-500/20 blur-[60px] group-hover:bg-blue-500/40 transition-colors duration-500"></div>
-        <div className="relative bg-white/5 backdrop-blur-2xl p-10 rounded-[2.5rem] border border-white/20 shadow-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-          <Logo className="scale-[1.4] relative z-10" />
-        </div>
-      </motion.div>
-
-      {/* Orbiting Facilities with Flowing Paths */}
-      {facilities.map((f, i) => {
-        const angle = (i * 360) / facilities.length;
-        const radius = 200; 
-        const x = Math.cos((angle * Math.PI) / 180) * radius;
-        const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-        return (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: f.delay * 0.1, type: "spring", stiffness: 100 }}
-            className="absolute z-30"
-            style={{ x, y }}
-          >
-            <motion.div
-              animate={{ 
-                y: [0, -15, 0],
-                rotate: [0, 2, 0]
-              }}
-              transition={{ 
-                duration: 4 + i, 
-                repeat: Infinity, 
-                ease: "easeInOut",
-                delay: i * 0.5
-              }}
-              className="flex flex-col items-center gap-3 group"
-            >
-              <div className={`relative w-16 h-16 md:w-20 md:h-20 rounded-[1.5rem] bg-gradient-to-br ${f.color} flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-xl group-hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2`}>
-                <f.icon className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-lg" />
-                <div className={`absolute inset-0 rounded-[1.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/20 -z-10`}></div>
-              </div>
-              <div className="px-4 py-1.5 rounded-xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg group-hover:bg-white/10 transition-colors">
-                <span className="text-[10px] md:text-xs font-black text-white uppercase tracking-[0.2em] whitespace-nowrap">
-                  {f.label}
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Glowing Flow Path */}
-            <svg className="absolute top-1/2 left-1/2 -z-10 w-[400px] h-[400px] pointer-events-none overflow-visible" style={{ transform: `translate(-50%, -50%)` }}>
-              <defs>
-                <linearGradient id={`grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-                  <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
-                  <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d={`M 0 0 Q ${-x/2} ${-y/2} ${-x} ${-y}`}
-                fill="none"
-                stroke={`url(#grad-${i})`}
-                strokeWidth="2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                animate={{ strokeDashoffset: [0, -100] }}
-                transition={{ 
-                  strokeDashoffset: { duration: 3, repeat: Infinity, ease: "linear" },
-                  pathLength: { duration: 1.5, delay: 0.5 }
-                }}
-                strokeDasharray="10 20"
-              />
-              <motion.circle 
-                r="3" 
-                fill="white"
-                className="blur-[2px]"
-                animate={{ 
-                  cx: [0, -x],
-                  cy: [0, -y],
-                  opacity: [0, 1, 0]
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity, 
-                  ease: "linear",
-                  delay: i * 0.5
-                }}
-              />
-            </svg>
-          </motion.div>
-        );
-      })}
-
-      {/* Ambient Floating Particles */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0, 0.5, 0],
-            y: [0, -100, 0],
-            x: [0, (Math.random() - 0.5) * 200, 0]
-          }}
-          transition={{ 
-            duration: 5 + Math.random() * 5, 
-            repeat: Infinity,
-            delay: Math.random() * 5
-          }}
-          className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
-          style={{ 
-            top: `${Math.random() * 100}%`, 
-            left: `${Math.random() * 100}%` 
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const CTASection = () => (
-  <section className="py-16 bg-white overflow-hidden">
+  <section className="py-24 px-6 bg-white">
     <motion.div 
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false }}
-      className="relative bg-[#0F172A] py-16 md:py-24 overflow-hidden shadow-2xl"
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="max-w-7xl mx-auto bg-gradient-to-r from-[#E0F2FE] via-[#F5F3FF] to-[#FDF2F8] rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden border border-white shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)]"
     >
-      <div className="absolute inset-0 opacity-40 pointer-events-none">
-        <div className="absolute top-0 right-[-100px] w-[800px] h-[800px] bg-blue-600 rounded-full blur-[150px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-[-100px] w-[600px] h-[600px] bg-purple-600 rounded-full blur-[120px] opacity-60"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="text-left">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></div>
-              Your complete financial ecosystem
-            </motion.div>
-            
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-              One Platform. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Total Financial</span> <br />
-              Control.
-            </h2>
-            
-            <p className="text-slate-400 text-base md:text-lg mb-10 font-medium leading-relaxed max-w-xl">
-              From daily payments to lifetime goals, FinKart connects you with every financial facility you'll ever need. Compare, apply, and grow—all in one interactive hub.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
-              <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 text-white px-8 py-4 rounded-xl font-black text-base hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-[1.02] transition-all">
-                Get Started Now
-              </button>
-              <button className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl font-black text-base hover:bg-white/10 transition-all backdrop-blur-sm">
-                Talk to Advisor
-              </button>
-            </div>
-
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/5">
-              {[
-                { label: 'Partners', val: '24+' },
-                { label: 'Solutions', val: '12+' },
-                { label: 'Uptime', val: '99.9%' }
-              ].map((s, i) => (
-                <div key={i}>
-                  <p className="text-xl font-black text-white">{s.val}</p>
-                  <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <FacilityHub />
-        </div>
+      {/* Subtle decorative blurs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/40 rounded-full translate-x-1/4 -translate-y-1/4 blur-[100px]"></div>
+      
+      <div className="relative z-10 max-w-3xl mx-auto">
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-[#6366F1] font-black text-[12px] uppercase tracking-[5px] mb-6"
+        >
+          Start your journey
+        </motion.p>
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tight text-[#2B3CA0]"
+        >
+          Master your finances <br/> with confidence.
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="text-slate-600 text-lg md:text-xl mb-12 font-medium leading-relaxed"
+        >
+          Join thousands of smart investors in Bangladesh who use FinCart to compare, save, and grow their wealth effortlessly.
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+        >
+          <button className="w-full sm:w-auto btn-gradient text-white px-12 py-5 rounded-[20px] font-black text-lg shadow-[0_20px_40px_-5px_rgba(43,60,160,0.2)] hover:scale-105 active:scale-95 transition-all duration-300">
+            Get Started Now
+          </button>
+          <button className="w-full sm:w-auto bg-white text-[#2B3CA0] border border-blue-100 px-12 py-5 rounded-[20px] font-bold text-lg hover:bg-blue-50 hover:scale-105 active:scale-95 transition-all duration-300">
+            Contact Support
+          </button>
+        </motion.div>
       </div>
     </motion.div>
   </section>
